@@ -1,7 +1,6 @@
 # team-air
 
-Codebase for the Team Air project that will be used to compete in AUVSI 
-SUAS Competition.
+Codebase for the Team Air project that will be used in the AUVSI SUAS competition.
 
 Captains: Kaloyan Stalev and Adam Beigel
 

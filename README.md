@@ -12,3 +12,4 @@ Members of EDT Team Air:
 - Manh Phan
 - Shri Patel
 - Yuseok Lee
+- Adrian Velazquez

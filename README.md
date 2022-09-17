@@ -9,5 +9,9 @@ Members of EDT Team Air:
 - Srivardhan Karnati
 - Caleb Satvedi
 - Frank Tarshis
+<<<<<<< Updated upstream
 - Shri Patel
 
+=======
+- Yuseok Lee
+>>>>>>> Stashed changes

@@ -9,5 +9,5 @@ Members of EDT Team Air:
 - Srivardhan Karnati
 - Caleb Satvedi
 - Frank Tarshis
-- - Shri Patel
+- Shri Patel
 

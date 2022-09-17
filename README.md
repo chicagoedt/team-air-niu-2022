@@ -11,3 +11,4 @@ Members of EDT Team Air:
 - Frank Tarshis
 - Guy cooler than Frank
 - Shri Patel
+- Yuseok Lee

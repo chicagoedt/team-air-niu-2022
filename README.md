@@ -10,4 +10,4 @@ Members of EDT Team Air:
 - Caleb Satvedi
 - Frank Tarshis
 - Guy cooler than Frank
-
+- Shri Patel

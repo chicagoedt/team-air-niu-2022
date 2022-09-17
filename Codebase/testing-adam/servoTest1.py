@@ -26,3 +26,5 @@ try:
         sleep(1.0)
 except KeyboardInterrupt:
     print("Program stopped")
+
+print("I love programming")

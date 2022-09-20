@@ -13,3 +13,4 @@ Members of EDT Team Air:
 - Shri Patel
 - Yuseok Lee
 - Adrian Velazquez
+- Junyoung Jeong

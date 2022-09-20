@@ -44,7 +44,7 @@ def ballInChamber(sensorRGB):
 # user_input = input("Press enter to start")
 runSorter = True
 doorServo.min()
-setVacuumMotor(vacuumMotor, true)  # turn vacuum on
+setVacuumMotor(vacuumMotor, True)  # turn vacuum on
 while(runSorter):
     sensorRGB = colorSensor.color_rgb_bytes
 

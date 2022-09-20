@@ -29,7 +29,7 @@ seqIndex = 0
 
 
 # set this to the "ambient" chamber rgb reading of the color sensor
-ambientColor = (30, 20, 30)
+ambientColor = (67, 10, 3)
 
 
 # determine if ball is in the chamber (sensor color a certain distance from ambient color)

@@ -1,8 +1,8 @@
 from gpiozero import Servo
 import board
 import adafruit_tcs34725
-import numpy as np
 
+from Codebase.LED import LED
 from colors import *
 from servoControl import *
 
@@ -45,8 +45,10 @@ def ballInChamber(sensorRGB):
 runSorter = True
 doorServo.min()
 setVacuumMotor(vacuumMotor, true)  # turn vacuum on
+leds = LED()
 while(runSorter):
     sensorRGB = colorSensor.color_rgb_bytes
+    leds.update(sensorRGB)
 
     # ball in the chamber
     if ballInChamber(sensorRGB):

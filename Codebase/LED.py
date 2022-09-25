@@ -1,4 +1,5 @@
 from rpi_ws281x import Adafruit_NeoPixel, Color
+import RPi.GPIO as GPIO
 
 # LED strip configuration:
 led_count = 12        # Number of LED pixels.
@@ -18,6 +19,7 @@ class LED:
         self.DMA = LED_DMA
         self.strip.begin()
         self.color = Color(0,0,0)
+
         return True
 
     def update(self, color):
@@ -34,4 +36,38 @@ class LED:
         self.color = Color(0, 0, 0)
         for i in range(self.count):
             self.strip.setPixelColor(i,self.color)
+        return True
+
+
+class LED_disc:
+
+    def __init__(self, LED_pins=[,20,26]):
+        GPIO.setmode(GPIO.BOARD)
+        GPIO.setup(LED_pins[0], GPIO.OUT)
+        GPIO.setup(LED_pins[1], GPIO.OUT)
+        GPIO.setup(LED_pins[2], GPIO.OUT)
+
+        self.red = GPIO.PWM(LED_pins[0], 0.5)
+        self.green = GPIO.PWM(LED_pins[1], 0.5)
+        self.blue = GPIO.PWM(LED_pins[2], 0.5)
+
+        # self.red_pin = LED_pins[0]
+        # self.red = LEDPWM(LED_pins[0])
+        # self.green_pin = LED_pins[1]
+        # self.green = LED(LED_pins[1])
+        # self.blue_pin = LED_pins[2]
+        # self.blue = LED(LED_pins[2])
+        return True
+
+    def update(self, color):
+        self.red.start((color[0]/255)*100)
+        self.green.start((color[1]/255)*100)
+        self.blue.start((color[2]/255)*100)
+        return True
+
+    def clear(self):
+        self.update([0,0,0])
+        self.red.stop()
+        self.green.stop()
+        self.blue.stop()
         return True

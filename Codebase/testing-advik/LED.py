@@ -44,22 +44,16 @@ class LED_disc:
     def __init__(self, LED_pins=[32,33,36]):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(LED_pins[0], GPIO.OUT)
-        print(LED_pins[0])
         GPIO.setup(LED_pins[1], GPIO.OUT)
-        print(LED_pins[1])
         GPIO.setup(LED_pins[2], GPIO.OUT)
-        print(LED_pins[2])
 
         self.red = GPIO.PWM(LED_pins[0], 50)
-        self.red_pin = LED_pins[0]
         self.green = GPIO.PWM(LED_pins[1], 50)
-        self.green_pin = LED_pins[1]
         self.blue = GPIO.PWM(LED_pins[2], 50)
-        self.blue_pin = LED_pins[2]
 
-        self.red.start(50)
-        self.blue.start(50)
-        self.green.start(50)
+        self.red.start(0)
+        self.green.start(0)
+        self.blue.start(0)
         # self.red_pin = LED_pins[0]
         # self.red = LEDPWM(LED_pins[0])
         # self.green_pin = LED_pins[1]
@@ -70,13 +64,8 @@ class LED_disc:
 
     def update(self, color):
         self.red.ChangeDutyCycle((color[0]/255)*100)
-        print((color[0]/255)*100)
         self.green.ChangeDutyCycle((color[1]/255)*100)
-        print((color[1] / 255) * 100)
         self.blue.ChangeDutyCycle((color[2]/255)*100)
-        print((color[2] / 255) * 100)
-        return True
-
     def clear(self):
         self.update([0,0,0])
         self.red.stop()

@@ -20,7 +20,7 @@ class LED:
         self.strip.begin()
         self.color = Color(0,0,0)
 
-        return True
+        return
 
     def update(self, color):
         self.color = Color(color[0], color[1], color[2])
@@ -41,15 +41,18 @@ class LED:
 
 class LED_disc:
 
-    def __init__(self, LED_pins=[,20,26]):
+    def __init__(self, LED_pins=[18,12,13]):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(LED_pins[0], GPIO.OUT)
         GPIO.setup(LED_pins[1], GPIO.OUT)
         GPIO.setup(LED_pins[2], GPIO.OUT)
 
         self.red = GPIO.PWM(LED_pins[0], 0.5)
+        self.red_pin = LED_pins[0]
         self.green = GPIO.PWM(LED_pins[1], 0.5)
+        self.green_pin = LED_pins[1]
         self.blue = GPIO.PWM(LED_pins[2], 0.5)
+        self.blue_pin = LED_pins[2]
 
         # self.red_pin = LED_pins[0]
         # self.red = LEDPWM(LED_pins[0])
@@ -57,10 +60,11 @@ class LED_disc:
         # self.green = LED(LED_pins[1])
         # self.blue_pin = LED_pins[2]
         # self.blue = LED(LED_pins[2])
-        return True
+        return
 
     def update(self, color):
         self.red.start((color[0]/255)*100)
+        print()
         self.green.start((color[1]/255)*100)
         self.blue.start((color[2]/255)*100)
         return True

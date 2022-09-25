@@ -1,7 +1,8 @@
-from Codebase.LED import LED
+from Codebase.LED import LED_disc
+from time import sleep
 import numpy as np
 
-leds = LED()
+leds = LED_disc()
 
 
 def wheel(in_Pos):
@@ -18,10 +19,12 @@ def wheel(in_Pos):
 
 
 while True:
+    print(leds.red_pin, leds.green_pin, leds.blue_pin)
     for rand_iter in range(255):
         color = wheel(rand_iter)
         leds.update(color)
         print(color)
+        sleep(10)
 
 
 

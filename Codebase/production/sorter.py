@@ -36,8 +36,11 @@ ambientColor = (67, 10, 3)
 # determine if ball is in the chamber (sensor color a certain distance from ambient color)
 def ballInChamber(sensorRGB):
     if (sensorRGB == (45, 0 , 0)):
+        print('no ball')
         return False
+    print('ball')
     return True
+
     # distance = np.linalg.norm(np.array(sensorRGB) - ambientColor)
     # print(distance)
     # return distance > 20 # return true if color is within some distance

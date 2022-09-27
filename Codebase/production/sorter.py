@@ -30,13 +30,17 @@ seqIndex = 0
 
 # set this to the "ambient" chamber rgb reading of the color sensor
 ambientColor = (67, 10, 3)
-
+# (255, 0, 0)
+# (45, 0, 0)
 
 # determine if ball is in the chamber (sensor color a certain distance from ambient color)
 def ballInChamber(sensorRGB):
-    distance = np.linalg.norm(np.array(sensorRGB) - ambientColor)
-    print(distance)
-    return distance > 20 # return true if color is within some distance
+    if (sensorRGB == (45, 0 , 0)):
+        return False
+    return True
+    # distance = np.linalg.norm(np.array(sensorRGB) - ambientColor)
+    # print(distance)
+    # return distance > 20 # return true if color is within some distance
     # return True
 
 

@@ -2,7 +2,7 @@ from gpiozero import Servo
 import board
 import adafruit_tcs34725
 
-from Codebase.LED import LED
+
 from colors import *
 from servoControl import *
 

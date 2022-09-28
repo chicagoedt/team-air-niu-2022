@@ -1,6 +1,6 @@
 from time import sleep
 from statistics import mean
-from Codebase.LED import LED_disc
+from LED import LED_disc_CP
 import numpy as np
 
 # these are the values we get from testing
@@ -37,7 +37,7 @@ def getBallColor(sensor):
         print("sd:", np.std(rgbReadings, 0))
 
     rgbAverage = np.mean(rgbReadings, 0)
-    leds = LED_disc()
+    leds = LED_disc_CP()
     leds.update(rgbAverage)
     return getClosestColor(rgbAverage)
 

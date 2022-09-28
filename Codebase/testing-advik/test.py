@@ -1,6 +1,5 @@
-from Codebase.LED import LED_disc
+from Codebase.production.LED import LED_disc
 from time import sleep
-import numpy as np
 
 leds = LED_disc()
 

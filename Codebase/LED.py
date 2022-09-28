@@ -2,15 +2,32 @@ from rpi_ws281x import Adafruit_NeoPixel, Color
 import RPi.GPIO as GPIO
 
 # LED strip configuration:
-led_count = 12        # Number of LED pixels.
-led_pin = 18          # GPIO pin connected to the pixels (must support PWM!).
+led_count = 12  # Number of LED pixels.
+led_pin = 18  # GPIO pin connected to the pixels (must support PWM!).
 frequency = 800000  # LED signal frequency in hertz (usually 800khz)
-dma = 10          # DMA channel to use for generating signal (try 10
+dma = 10  # DMA channel to use for generating signal (try 10
 led_brightness = 255  # Set to 0 for darkest and 255 for brightest
 
+
+# Discrete LED pinout
+# R = pin GPIO 12
+# G = pin GPIO 13
+# B = pin GPIO 16
+# GND = the pin between pin 12 & 16
+# look at testing-advik for pinout of a discrete LED
+
+"""
+how to use the LED class:
+    from LED import LED_disc, LED
+    variable = LED_disc() # you can pass in pin numbers for LED_disc like LED_disc([32,33,36])
+    # mind you these are the board pin numbers. Use pinout.xyz to find the exact numbers
+    variable.update([R,G,B]) # R G B are integers between 0-255 for the value of said Led
+    variable.clear() # turns the LED off
+"""
 class LED:
 
-    def __init__(self, LED_PIN = led_pin, LED_COUNT=led_count, LED_BRIGHTNESS=led_brightness,LED_FREQ=frequency,LED_DMA = dma):
+    def __init__(self, LED_PIN=led_pin, LED_COUNT=led_count, LED_BRIGHTNESS=led_brightness, LED_FREQ=frequency,
+                 LED_DMA=dma):
         self.strip = Adafruit_NeoPixel(
             LED_COUNT, LED_PIN, LED_FREQ, LED_DMA, False, LED_BRIGHTNESS)
         self.pin = LED_PIN
@@ -18,14 +35,14 @@ class LED:
         self.brightness = LED_BRIGHTNESS
         self.DMA = LED_DMA
         self.strip.begin()
-        self.color = Color(0,0,0)
+        self.color = Color(0, 0, 0)
 
         return
 
     def update(self, color):
         self.color = Color(color[0], color[1], color[2])
         for i in range(self.count):
-            self.strip.setPixelColor(i,self.color)
+            self.strip.setPixelColor(i, self.color)
         return True
 
     def brightness(self, brightness):
@@ -35,13 +52,13 @@ class LED:
     def clear(self):
         self.color = Color(0, 0, 0)
         for i in range(self.count):
-            self.strip.setPixelColor(i,self.color)
+            self.strip.setPixelColor(i, self.color)
         return True
 
 
 class LED_disc:
 
-    def __init__(self, LED_pins=[32,33,36]):
+    def __init__(self, LED_pins=[32, 33, 36]):
         GPIO.setmode(GPIO.BOARD)
         GPIO.setup(LED_pins[0], GPIO.OUT)
         GPIO.setup(LED_pins[1], GPIO.OUT)
@@ -63,11 +80,12 @@ class LED_disc:
         return
 
     def update(self, color):
-        self.red.ChangeDutyCycle((color[0]/255)*100)
-        self.green.ChangeDutyCycle((color[1]/255)*100)
-        self.blue.ChangeDutyCycle((color[2]/255)*100)
+        self.red.ChangeDutyCycle((color[0] / 255) * 100)
+        self.green.ChangeDutyCycle((color[1] / 255) * 100)
+        self.blue.ChangeDutyCycle((color[2] / 255) * 100)
+
     def clear(self):
-        self.update([0,0,0])
+        self.update([0, 0, 0])
         self.red.stop()
         self.green.stop()
         self.blue.stop()

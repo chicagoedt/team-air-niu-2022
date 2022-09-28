@@ -110,6 +110,7 @@ class LED_disc_CP:
     def update(self, color):
         self.red.duty_cycle = int(color[0] * 2 * 65535 / 255)
         self.green.duty_cycle = int(color[1] * 2 * 65535 / 255)
+        self.blue.duty_cycle = int(color[2] * 2 * 65535 / 255)
 
     def clear(self):
         self.update([0, 0, 0])

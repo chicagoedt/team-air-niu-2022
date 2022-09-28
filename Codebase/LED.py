@@ -1,4 +1,4 @@
-from rpi_ws281x import Adafruit_NeoPixel, Color
+# from _rpi_ws281x import Adafruit_NeoPixel, Color
 import RPi.GPIO as GPIO
 
 # LED strip configuration:
@@ -24,36 +24,36 @@ how to use the LED class:
     variable.update([R,G,B]) # R G B are integers between 0-255 for the value of said Led
     variable.clear() # turns the LED off
 """
-class LED:
-
-    def __init__(self, LED_PIN=led_pin, LED_COUNT=led_count, LED_BRIGHTNESS=led_brightness, LED_FREQ=frequency,
-                 LED_DMA=dma):
-        self.strip = Adafruit_NeoPixel(
-            LED_COUNT, LED_PIN, LED_FREQ, LED_DMA, False, LED_BRIGHTNESS)
-        self.pin = LED_PIN
-        self.count = LED_COUNT
-        self.brightness = LED_BRIGHTNESS
-        self.DMA = LED_DMA
-        self.strip.begin()
-        self.color = Color(0, 0, 0)
-
-        return
-
-    def update(self, color):
-        self.color = Color(color[0], color[1], color[2])
-        for i in range(self.count):
-            self.strip.setPixelColor(i, self.color)
-        return True
-
-    def brightness(self, brightness):
-        self.strip.setbrightness(brightness)
-        return True
-
-    def clear(self):
-        self.color = Color(0, 0, 0)
-        for i in range(self.count):
-            self.strip.setPixelColor(i, self.color)
-        return True
+# class LED:
+#
+#     def __init__(self, LED_PIN=led_pin, LED_COUNT=led_count, LED_BRIGHTNESS=led_brightness, LED_FREQ=frequency,
+#                  LED_DMA=dma):
+#         self.strip = Adafruit_NeoPixel(
+#             LED_COUNT, LED_PIN, LED_FREQ, LED_DMA, False, LED_BRIGHTNESS)
+#         self.pin = LED_PIN
+#         self.count = LED_COUNT
+#         self.brightness = LED_BRIGHTNESS
+#         self.DMA = LED_DMA
+#         self.strip.begin()
+#         self.color = Color(0, 0, 0)
+#
+#         return
+#
+#     def update(self, color):
+#         self.color = Color(color[0], color[1], color[2])
+#         for i in range(self.count):
+#             self.strip.setPixelColor(i, self.color)
+#         return True
+#
+#     def brightness(self, brightness):
+#         self.strip.setbrightness(brightness)
+#         return True
+#
+#     def clear(self):
+#         self.color = Color(0, 0, 0)
+#         for i in range(self.count):
+#             self.strip.setPixelColor(i, self.color)
+#         return True
 
 
 class LED_disc:

@@ -1,7 +1,7 @@
 from gpiozero import Servo
 import board
 import adafruit_tcs34725
-
+from LED import LED_disc_CP
 
 from colors import *
 from servoControl import *
@@ -13,7 +13,7 @@ doorServo = Servo(14)
 pushServo = Servo(15)
 vacuumMotor = Servo(18)
 chamberServo = Servo(23)
-
+leds = LED_disc_CP()
 # arming sequence?
 vacuumMotor.value = -1
 sleep(0.5)
@@ -47,6 +47,7 @@ doorServo.min()
 setVacuumMotor(vacuumMotor, true)  # turn vacuum on
 while(runSorter):
     sensorRGB = colorSensor.color_rgb_bytes
+
 
     # ball in the chamber
     if ballInChamber(sensorRGB):

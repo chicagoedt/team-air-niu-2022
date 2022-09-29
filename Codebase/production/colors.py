@@ -37,8 +37,8 @@ def getBallColor(sensor):
         print("sd:", np.std(rgbReadings, 0))
 
     rgbAverage = np.mean(rgbReadings, 0)
-    leds = LED_disc_CP()
-    leds.update(rgbAverage)
+    global leds
+    leds.update(rgbAverage[2])
     return getClosestColor(rgbAverage)
 
 def getClosestColor(rgbAverage):

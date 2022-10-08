@@ -6,7 +6,7 @@ from control import Control
 
 control = Control()
 
-control.setRGB(0, 255/255, 0)  # RGB must be between 0 and 1
+control.setRGB(0, 255, 0)
 control.button.wait_for_press()
 control.setRGB(0, 0, 0)
 

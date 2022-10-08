@@ -20,7 +20,7 @@ class Control:
 
     # set the color of the rgb leds
     def setRGB(self, r, g, b):
-        self.led.color = (r, g, b)
+        self.led.color = (r/255, g/255, b/255)  # rgb values must be between 0 and 1
     
     # move the ball using the lever attached to pushServo
     def moveBall(self):

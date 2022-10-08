@@ -31,9 +31,9 @@ ambientColor = (67, 10, 3)
 
 
 def boostColor(rgbValues):
-    r = rgbValues[0] * 1.4
-    g = rgbValues[1] * 1.4
-    b = rgbValues[2] * 1.4
+    r = int(rgbValues[0] * 1.4)
+    g = int(rgbValues[1] * 1.4)
+    b = int(rgbValues[2] * 1.4)
     return (r, g, b)
 
 # determine if ball is in the chamber (sensor color a certain distance from ambient color)

@@ -14,12 +14,6 @@ pushServo = Servo(15)
 vacuumMotor = Servo(18)
 chamberServo = Servo(23)
 
-# arming sequence?
-vacuumMotor.value = -1
-sleep(0.5)
-
-# testVacuumSpeed(vacuumMotor)
-
 # initialize the sequences
 s1 = ("blue", "purple", "red", "blue")
 s2 = ("green", "yellow", "red", "green")

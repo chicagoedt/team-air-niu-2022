@@ -1,17 +1,13 @@
 # add to /etc/rc.local:
 # python3 /home/pi/github/team-air/Codebase/production/startup.py
 
-from gpiozero import LED
-from gpiozero import Button
-from time import sleep
+from armMotor import armMotor
+from control import Control
 
-blue = LED(16)
-green = LED(20)
-red = LED(21)
-button = Button(12)
+control = Control()
 
-green.on()
+control.setRGB(0, 255/255, 0)  # RGB must be between 0 and 1
+control.button.wait_for_press()
+control.setRGB(0, 0, 0)
 
-button.wait_for_press()
-
-green.off()
+armMotor(control)

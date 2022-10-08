@@ -27,6 +27,13 @@ ambientColor = (67, 10, 3)
 # (255, 0, 0)
 # (45, 0, 0)
 
+#caleb's attempt to boost the color
+def colorBooster(rgbValues):
+    r = rgbValues[0] * 1.4
+    g = rgbValues[1] * 1.4
+    b = rgbValues[2] * 1.4
+    return [r,g,b]
+
 # determine if ball is in the chamber (sensor color a certain distance from ambient color)
 def ballInChamber(sensorRGB):
     if (sensorRGB == (45, 0 , 0) or sensorRGB == (255, 0, 0)):

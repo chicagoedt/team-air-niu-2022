@@ -14,3 +14,6 @@ Members of EDT Team Air:
 - Yuseok Lee
 - Adrian Velazquez
 - Junyoung Jeong
+- Adrian Tse
+- Davin Doan
+

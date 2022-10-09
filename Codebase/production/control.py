@@ -22,6 +22,14 @@ class Control:
     def setRGB(self, r, g, b):
         self.led.color = (r/255, g/255, b/255)  # rgb values must be between 0 and 1
 
+    def readColor(self):
+        return colorSensor.color_rgb_bytes
+
+    def resetServos(self):
+        self.doorServo.min()
+        self.pushServo.min()
+        self.chamberServo.min()
+
     # move the ball using the lever attached to pushServo
     def moveBall(self):
         self.pushServo.min()

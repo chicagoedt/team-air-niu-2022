@@ -1,5 +1,4 @@
 from time import sleep
-from statistics import mean
 import numpy as np
 
 # these are the values we get from testing
@@ -11,31 +10,15 @@ blue = (2, 18, 47)
 purple = (13, 11, 27)
 pink = (43, 6, 1)
 
-colors = {"red":red,
-          "orange":orange,
-          "yellow":yellow,
-          "green":green,
-          "blue":blue,
-          "purple":purple,
-          "pink":pink}
-
-# read color 10 times, get the average, then return a string color closest to that average
-def getBallColor(sensor):
-    rgbReadings = []
-    numReadings = 10
-
-    print("getting average...")
-
-    for i in range(numReadings):
-        rgbReadings.append(sensor.color_rgb_bytes)
-        sleep(0.1)
-
-    rgbAverage = np.mean(rgbReadings, 0)
-
-    print("sd:", np.std(rgbReadings, 0))
-    print("avg:", rgbAverage)
-
-    return getClosestColor(rgbAverage)
+colors = {
+    "red":red,
+    "orange":orange,
+    "yellow":yellow,
+    "green":green,
+    "blue":blue,
+    "purple":purple,
+    "pink":pink
+}
 
 # find the closest vector to the color sensor reading
 def getClosestColor(rgbAverage):

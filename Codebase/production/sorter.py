@@ -1,18 +1,6 @@
-from gpiozero import Servo
-import board
-import adafruit_tcs34725
 import numpy as np
 
 from colors import *
-from servoControl import *
-
-# initialize sensor and servos
-i2c = board.I2C()
-colorSensor = adafruit_tcs34725.TCS34725(i2c)
-doorServo = Servo(14)
-pushServo = Servo(15)
-vacuumMotor = Servo(18)
-chamberServo = Servo(23)
 
 # initialize the sequences
 s1 = ("blue", "purple", "red", "blue")
@@ -47,38 +35,47 @@ def ballInChamber(sensorRGB):
     # return distance > 20 # return true if color is within some distance
     # return True
 
+# read color 10 times, get the average, then return a string color closest to that average
+def getBallColor(control):
+    rgbReadings = []
+    numReadings = 10
 
-# prompt to look for color
-# user_input = input("Press enter to start")
-runSorter = True
-doorServo.min()
-setVacuumMotor(vacuumMotor, True)  # turn vacuum on
-while (runSorter):
-    sensorRGB = colorSensor.color_rgb_bytes
+    print("getting average...")
 
-    # ball in the chamber
-    if ballInChamber(sensorRGB):
-        # get color of ball as a string
-        ballColor = getBallColor(colorSensor)
-        print(ballColor)
+    for i in range(numReadings):
+        rgbReadings.append(control.readColor())
+        sleep(0.1)
 
-        # if it matches the next color we need, keep it
-        if ballColor == s1[seqIndex]:
-            print("keeping ball")
-            keepBall(doorServo, pushServo, vacuumMotor)
-            seqIndex += 1
-        else:  # otherwise drop it
-            print("dropping ball")
-            dropBall(vacuumMotor)
+    rgbAverage = np.mean(rgbReadings, 0)
 
-    # reached end of specified sequence
-    if seqIndex == len(s1):
-        dropSequence(chamberServo)
+    print("sd:", np.std(rgbReadings, 0))
+    print("avg:", rgbAverage)
 
-    # user_input = input("Press enter to read color or # to stop: ")
-    # if (user_input == "#"):
-    #     runSorter = False
+    return getClosestColor(rgbAverage)
 
+def runSorter(control):
+    control.resetServos()
+    control.setVacuumMotor(True)
 
-# wtf is servo jitter?!?!?! look into it
-# -chris
+    while (True):
+        sensorRGB = control.readColor()
+
+        # ball in the chamber
+        if ballInChamber(sensorRGB):
+            # get color of ball as a string
+            ballColor = getBallColor(control)
+            print(ballColor)
+
+            # if it matches the next color we need, keep it
+            if ballColor == s1[seqIndex]:
+                print("keeping ball")
+                control.keepBall()
+                seqIndex += 1
+            else:  # otherwise drop it
+                print("dropping ball")
+                control.dropBall()
+
+        # reached end of specified sequence
+        if seqIndex == len(s1):
+            control.dropSequence()
+

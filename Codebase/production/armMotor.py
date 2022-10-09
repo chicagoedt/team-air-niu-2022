@@ -1,4 +1,9 @@
 from time import sleep
+from control import *
+
+if __name__ = "__main__":
+    control = Control()
+    armMotor(control)
 
 def armMotor(control):
     control.vacuumMotor.value = -1

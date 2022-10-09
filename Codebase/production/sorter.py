@@ -1,39 +1,21 @@
 import numpy as np
-
 from colors import *
 
-# initialize the sequences
-s1 = ("blue", "purple", "red", "blue")
-s2 = ("green", "yellow", "red", "green")
-s3 = ("blue", "purple", "red", "green")
-sequence = (s1, s2, s3)
-seqIndex = 0
-
-
-# set this to the "ambient" chamber rgb reading of the color sensor
-ambientColor = (67, 10, 3)
-# (255, 0, 0)
-# (45, 0, 0)
-
-# caleb's attempt to boost the color, use 1.4 as a ratio
+# boost color by 40%
+# TODO: cap it at 255
 def boostColor(rgbValues):
     r = int(rgbValues[0] * 1.4)
     g = int(rgbValues[1] * 1.4)
     b = int(rgbValues[2] * 1.4)
     return (r, g, b)
 
-# determine if ball is in the chamber (sensor color a certain distance from ambient color)
+# determine if ball is in the chamber
 def ballInChamber(sensorRGB):
     if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):
         print('no ball')
         return False
     print('ball')
     return True
-
-    # distance = np.linalg.norm(np.array(sensorRGB) - ambientColor)
-    # print(distance)
-    # return distance > 20 # return true if color is within some distance
-    # return True
 
 # read color 10 times, get the average, then return a string color closest to that average
 def getBallColor(control):
@@ -53,7 +35,15 @@ def getBallColor(control):
 
     return getClosestColor(rgbAverage)
 
+# program loop
 def runSorter(control):
+    # initialize the sequences
+    s1 = ("blue", "purple", "red", "blue")
+    s2 = ("green", "yellow", "red", "green")
+    s3 = ("blue", "purple", "red", "green")
+    sequence = (s1, s2, s3)
+    seqIndex = 0
+
     control.resetServos()
     control.setVacuumMotor(True)
 

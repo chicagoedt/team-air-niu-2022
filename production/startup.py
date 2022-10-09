@@ -1,5 +1,5 @@
 # add to /etc/rc.local:
-# python3 /home/pi/github/team-air/Codebase/production/startup.py
+# python3 /home/pi/github/team-air/production/startup.py
 
 from armMotor import armMotor
 from control import Control

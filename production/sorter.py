@@ -2,11 +2,18 @@ import numpy as np
 from colors import *
 
 # boost color by 40%
-# TODO: cap it at 255
+
 def boostColor(rgbValues):
     r = int(rgbValues[0] * 1.4)
     g = int(rgbValues[1] * 1.4)
     b = int(rgbValues[2] * 1.4)
+    # cap r,g,b values at 255
+    if r > 255:
+        r = 255
+    if g > 255:
+        g = 255
+    if b > 255:
+        b = 255
     return (r, g, b)
 
 # determine if ball is in the chamber

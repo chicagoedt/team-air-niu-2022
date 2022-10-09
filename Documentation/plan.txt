@@ -1,0 +1,64 @@
+In the main python file:
+
+1> libraries to be imported: 
+gpiozero -> servo
+gpiozero -> LED
+board
+adafruit_tcs34725
+
+
+2> create class control:
+variables: #components of the drone's color sorting system 
+    - LED
+    - Button
+    - 3x servos
+    - vacuumMotor
+
+functions: 
+    - setRGB(tuple) #set RGB LED
+    - setMotor(int) #set the speed of the motor
+    - setServo(int) #for 3x Servo, set the positions of the servo
+    - vacuumMotor   #for turning on the vacuum
+
+3> plan for the program: 
+*General plan: 
+    startup.py            ->  armMotor.py              -> sorter.py (the sorter.py utilizes colors.py & servoControl.py)  
+    (tells user               (check whether              (main part: process balls: sorting color ...)
+     that the program          turning on motor
+     is starting               is safe)
+     and is waiting)           
+                     
+                     
+
+* Detailed plan:
+    call startup.py {
+        turn on LED, set color to green, blink <green means the program is starting and waiting for inputs>
+        wait for button to press
+    }
+
+    call armMotor.py { #checks whether turning on motor is safe
+        motor = -1
+        turn on motor
+        return
+    }
+
+    turn on LED, set color to red, blink <for warning that armMotor.py is checking the safety of turning on the motor>
+
+    wait for button to press
+
+    call sorter.py { #process the balls
+        func ballInChamber() # checks if ball in chamber
+        func boostColor(RGB) # makes the color brighter
+        loop {
+            check for ball in chamber
+            get color -> change RGB LED 
+            check sequence
+            setRGB(boostColor(colorSensorValue))
+        }
+    }
+
+
+
+
+
+

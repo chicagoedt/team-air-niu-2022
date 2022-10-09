@@ -14,16 +14,10 @@ pushServo = Servo(15)
 vacuumMotor = Servo(18)
 chamberServo = Servo(23)
 
-# arming sequence?
-vacuumMotor.value = -1
-sleep(0.5)
-
-# testVacuumSpeed(vacuumMotor)
-
 # initialize the sequences
 s1 = ("blue", "purple", "red", "blue")
 s2 = ("green", "yellow", "red", "green")
-s3  = ("blue", "purple", "red", "green")
+s3 = ("blue", "purple", "red", "green")
 sequence = (s1, s2, s3)
 seqIndex = 0
 
@@ -33,9 +27,16 @@ ambientColor = (67, 10, 3)
 # (255, 0, 0)
 # (45, 0, 0)
 
+# caleb's attempt to boost the color, use 1.4 as a ratio
+def boostColor(rgbValues):
+    r = int(rgbValues[0] * 1.4)
+    g = int(rgbValues[1] * 1.4)
+    b = int(rgbValues[2] * 1.4)
+    return (r, g, b)
+
 # determine if ball is in the chamber (sensor color a certain distance from ambient color)
 def ballInChamber(sensorRGB):
-    if (sensorRGB == (45, 0 , 0)):
+    if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):
         print('no ball')
         return False
     print('ball')
@@ -52,7 +53,7 @@ def ballInChamber(sensorRGB):
 runSorter = True
 doorServo.min()
 setVacuumMotor(vacuumMotor, True)  # turn vacuum on
-while(runSorter):
+while (runSorter):
     sensorRGB = colorSensor.color_rgb_bytes
 
     # ball in the chamber
@@ -72,12 +73,11 @@ while(runSorter):
 
     # reached end of specified sequence
     if seqIndex == len(s1):
-        dropSequence(chamberServo);
+        dropSequence(chamberServo)
 
     # user_input = input("Press enter to read color or # to stop: ")
     # if (user_input == "#"):
     #     runSorter = False
-
 
 
 # wtf is servo jitter?!?!?! look into it

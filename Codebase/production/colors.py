@@ -30,20 +30,17 @@ def getBallColor(sensor):
         rgbReadings.append(sensor.color_rgb_bytes)
         sleep(0.1)
 
-    print("done")
-
-    if (True) :
-        print("sd:", np.std(rgbReadings, 0))
-
     rgbAverage = np.mean(rgbReadings, 0)
+
+    print("sd:", np.std(rgbReadings, 0))
+    print("avg:", rgbAverage)
 
     return getClosestColor(rgbAverage)
 
+# find the closest vector to the color sensor reading
 def getClosestColor(rgbAverage):
     minDistance = 444  # farthest possible distance is sqrt(256^2 + 256^2 + 256^2) = 443.4
     minColor = ""
-
-    print("reading:", rgbAverage)
 
     # calculate euclidean distance between each color and rgbAverage,
     # updating min as we go

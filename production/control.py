@@ -22,9 +22,11 @@ class Control:
     def setRGB(self, r, g, b):
         self.led.color = (r/255, g/255, b/255)  # rgb values must be between 0 and 1
 
+    # MANH: read color from colorSensor
     def readColor(self):
         return colorSensor.color_rgb_bytes
 
+    #Manh: reset all servos to the position zero
     def resetServos(self):
         self.doorServo.min()
         self.pushServo.min()
@@ -50,7 +52,7 @@ class Control:
 
     # turn off vacuum, open the door, push the ball, turn on the vacuum
     def keepBall(self):
-        self.setVacuumMotor(False)
+        self.setVacuumMotor(False) 
         self.openDoor()
         self.moveBall()
         self.setVacuumMotor(True)

@@ -7,7 +7,10 @@ def boostColor(rgbValues):
     r = int(rgbValues[0] * 1.4)
     g = int(rgbValues[1] * 1.4)
     b = int(rgbValues[2] * 1.4)
-    # cap r,g,b values at 255
+    # cap r,g,b values at 255  
+    #MANH: I dont like this: if all rgb values after boosted are > 255 then we boostColor to a totally different color
+    #MANH: A better solution is that we should find max among r, g, b after being boosted. If that max is greated than 255,
+    #MANH: set that max to 255 and the other is ratio respective of the max (This may be annoying)
     if r > 255:
         r = 255
     if g > 255:
@@ -18,7 +21,7 @@ def boostColor(rgbValues):
 
 # determine if ball is in the chamber
 def ballInChamber(sensorRGB):
-    if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):
+    if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):  
         print('no ball')
         return False
     print('ball')
@@ -35,9 +38,9 @@ def getBallColor(control):
         rgbReadings.append(control.readColor())
         sleep(0.1)
 
-    rgbAverage = np.mean(rgbReadings, 0)
+    rgbAverage = np.mean(rgbReadings, 0) 
 
-    print("sd:", np.std(rgbReadings, 0))
+    print("std:", np.std(rgbReadings, 0)) #MANH: I just fix from 'sd' to 'std'
     print("avg:", rgbAverage)
 
     return getClosestColor(rgbAverage)
@@ -51,10 +54,10 @@ def runSorter(control):
     sequence = (s1, s2, s3)
     seqIndex = 0
 
-    control.resetServos()
-    control.setVacuumMotor(True)
+    control.resetServos() #MANH: curious, do u need to import control.py to have access to class control?
+    control.setVacuumMotor(True) 
 
-    while (True):
+    while (True): #MANH: this while loop just never end ???, we need to make this while loop more controllable
         sensorRGB = control.readColor()
 
         # ball in the chamber

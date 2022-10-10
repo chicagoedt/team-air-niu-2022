@@ -1,10 +1,6 @@
 from time import sleep
 from control import *
 
-if __name__ == "__main__": 
-    control = Control()
-    armMotor(control)
-
 def armMotor(control):
     control.vacuumMotor.value = -1
 
@@ -19,3 +15,7 @@ def armMotor(control):
     control.vacuumMotor.value = -0.6
     sleep(1)
     control.vacuumMotor.value = -1
+
+if __name__ == "__main__": 
+    control = Control()
+    armMotor(control)

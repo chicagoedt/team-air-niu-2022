@@ -10,9 +10,11 @@ class Control:
     def __init__(self):
         self.button = Button(12)
         self.led = RGBLED(21, 20, 16)
-        i2c = board.I2C()
-        self.colorSensor = adafruit_tcs34725.TCS34725(i2c)
-
+        try:
+            i2c = board.I2C()
+            self.colorSensor = adafruit_tcs34725.TCS34725(i2c)
+        except:
+            print("no color sensor connected")
         self.doorServo = Servo(14)
         self.pushServo = Servo(15)
         self.vacuumMotor = Servo(18)

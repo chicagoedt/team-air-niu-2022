@@ -1,7 +1,7 @@
 from time import sleep
 from control import *
 
-if __name__ = "__main__":
+if __name__ != "__main__":
     control = Control()
     armMotor(control)
 

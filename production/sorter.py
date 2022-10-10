@@ -2,7 +2,6 @@ import numpy as np
 from colors import *
 
 # boost color by 40%
-
 def boostColor(rgbValues):
     r = int(rgbValues[0] * 1.4)
     g = int(rgbValues[1] * 1.4)

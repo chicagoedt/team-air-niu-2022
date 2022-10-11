@@ -10,6 +10,7 @@ def boostColor(rgbValues):
     #MANH: I dont like this: if all rgb values after boosted are > 255 then we boostColor to a totally different color
     #MANH: A better solution is that we should find max among r, g, b after being boosted. If that max is greated than 255,
     #MANH: set that max to 255 and the other is ratio respective of the max (This may be annoying)
+    #Yuseok: How to? test physically first? 
     if r > 255:
         r = 255
     if g > 255:

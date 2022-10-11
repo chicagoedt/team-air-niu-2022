@@ -49,6 +49,15 @@ def runSorter(control):
     s1 = ("blue", "purple", "red", "blue")
     s2 = ("green", "yellow", "red", "green")
     s3 = ("blue", "purple", "red", "green")
+    lightColors = {
+        "red":(255, 0, 0),
+        "orange":(255, 165, 0),
+        "yellow":(255, 255, 0),
+        "green":(0, 255, 0),
+        "blue":(0, 0, 255),
+        "purple":(255, 0, 255),
+        "pink":(255,192,203)
+    }
     sequence = (s1, s2, s3)
     seqIndex = 0
 
@@ -64,6 +73,8 @@ def runSorter(control):
             # get color of ball as a string
             ballColor = getBallColor(control)
             print(ballColor)
+            control.setRGB(lightColors[ballColor])
+
 
             # if it matches the next color we need, keep it
             if ballColor == s1[seqIndex]:

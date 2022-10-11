@@ -21,8 +21,8 @@ class Control:
         self.chamberServo = Servo(23)
 
     # set the color of the rgb leds
-    def setRGB(self, r, g, b):
-        self.led.color = (r/255, g/255, b/255)  # rgb values must be between 0 and 1
+    def setRGB(self, rgb):
+        self.led.color = (rgb[0]/255, rgb[1]/255, rgb[2]/255)  # rgb values must be between 0 and 1
 
     # MANH: read color from colorSensor
     def readColor(self):

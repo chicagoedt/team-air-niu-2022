@@ -2,7 +2,7 @@ import numpy as np
 from control import *
 from colors import *
 
-# boost color by 40%
+# boost color with the ratio that would not squash the values.
 def boostColor(rgbValues):
     r = int(rgbValues[0])
     g = int(rgbValues[1])

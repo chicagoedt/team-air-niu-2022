@@ -1,4 +1,5 @@
 import numpy as np
+from control import *
 from colors import *
 
 # boost color by 40%
@@ -17,7 +18,7 @@ def boostColor(rgbValues):
 
 # determine if ball is in the chamber
 def ballInChamber(sensorRGB):
-    if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):  
+    if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):
         print('no ball')
         return False
     print('ball')
@@ -34,9 +35,9 @@ def getBallColor(control):
         rgbReadings.append(control.readColor())
         sleep(0.1)
 
-    rgbAverage = np.mean(rgbReadings, 0) 
+    rgbAverage = np.mean(rgbReadings, 0)
 
-    print("std:", np.std(rgbReadings, 0)) #MANH: I just fix from 'sd' to 'std'
+    print("std:", np.std(rgbReadings, 0))
     print("avg:", rgbAverage)
 
     return getClosestColor(rgbAverage)
@@ -50,10 +51,11 @@ def runSorter(control):
     sequence = (s1, s2, s3)
     seqIndex = 0
 
-    control.resetServos() #MANH: curious, do u need to import control.py to have access to class control?
-    control.setVacuumMotor(True) 
+    control.resetServos()
+    control.setVacuumMotor(True)
 
-    while (True): #MANH: this while loop just never end ???, we need to make this while loop more controllable
+    # TODO @MANH: add exit condition to while loop
+    while (True):
         sensorRGB = control.readColor()
 
         # ball in the chamber

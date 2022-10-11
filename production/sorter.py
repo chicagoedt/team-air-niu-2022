@@ -4,9 +4,9 @@ from colors import *
 
 # boost color by 40%
 def boostColor(rgbValues):
-    r = int(rgbValues[0] * 1.4)
-    g = int(rgbValues[1] * 1.4)
-    b = int(rgbValues[2] * 1.4)
+    r = int(rgbValues[0])
+    g = int(rgbValues[1])
+    b = int(rgbValues[2])
     
     rgbList = [r,g,b]
     max_value = max(rgbList)

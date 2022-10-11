@@ -7,15 +7,16 @@ def boostColor(rgbValues):
     r = int(rgbValues[0] * 1.4)
     g = int(rgbValues[1] * 1.4)
     b = int(rgbValues[2] * 1.4)
-    # cap r,g,b values at 255  
-    if r > 255:
-        r = 255
-    if g > 255:
-        g = 255
-    if b > 255:
-        b = 255
-    return (r, g, b)
-
+    
+    rgbList = [r,g,b]
+    max_value = max(rgbList)
+    ratio = 255/max_value
+    
+    r = int(ratio * r)
+    g = int(ratio * g)
+    b = int(ratio * b)
+    return (r,g,b)
+        
 # determine if ball is in the chamber
 def ballInChamber(sensorRGB):
     if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):

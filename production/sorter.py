@@ -1,21 +1,6 @@
 import numpy as np
 from control import *
 from colors import *
-
-# boost color with the ratio that would not squash the values.
-def boostColor(rgbValues):
-    r = int(rgbValues[0])
-    g = int(rgbValues[1])
-    b = int(rgbValues[2])
-    
-    rgbList = [r,g,b]
-    max_value = max(rgbList)
-    ratio = 255/max_value
-    
-    r = int(ratio * r)
-    g = int(ratio * g)
-    b = int(ratio * b)
-    return (r,g,b)
         
 # determine if ball is in the chamber
 def ballInChamber(sensorRGB):
@@ -47,8 +32,6 @@ def getBallColor(control):
 def runSorter(control):
     # initialize the sequences
     s1 = ("blue", "purple", "red", "blue")
-    s2 = ("green", "yellow", "red", "green")
-    s3 = ("blue", "purple", "red", "green")
     lightColors = {
         "red":(255, 0, 0),
         "orange":(255, 165, 0),
@@ -58,13 +41,11 @@ def runSorter(control):
         "purple":(255, 0, 255),
         "pink":(255,192,203)
     }
-    sequence = (s1, s2, s3)
     seqIndex = 0
 
     control.resetServos()
     control.setVacuumMotor(True)
 
-    # TODO @MANH: add exit condition to while loop
     while (True):
         sensorRGB = control.readColor()
 
@@ -80,12 +61,17 @@ def runSorter(control):
             if ballColor == s1[seqIndex]:
                 print("keeping ball")
                 control.keepBall()
+
+                #wait for user to decide dropping the ball
+                userType = input('Enter # to drop the ball')
+                while(userType != '#'):
+                    userType = input('Enter # to drop the ball')
+                
+                #drop ball
+                control.dropSequence()
                 seqIndex += 1
             else:  # otherwise drop it
                 print("dropping ball")
                 control.dropBall()
 
-        # reached end of specified sequence
-        if seqIndex == len(s1):
-            control.dropSequence()
 

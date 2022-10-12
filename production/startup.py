@@ -3,8 +3,6 @@
 
 from armMotor import *
 from sorter import *
-from control import *
-from time import sleep
 
 def buttonPressed():
     global buttonHasBeenPressed

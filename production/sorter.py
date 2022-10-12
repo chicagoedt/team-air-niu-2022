@@ -51,12 +51,12 @@ def runSorter(control):
     s3 = ("blue", "purple", "red", "green")
     lightColors = {
         "red":(255, 0, 0),
-        "orange":(255, 165, 0),
-        "yellow":(255, 255, 0),
+        "orange":(255, 40, 0),
+        "yellow":(255, 150, 0),
         "green":(0, 255, 0),
         "blue":(0, 0, 255),
-        "purple":(255, 0, 255),
-        "pink":(255,192,203)
+        "purple":(80, 0, 255),
+        "pink":(255, 50, 50)
     }
     sequence = (s1, s2, s3)
     seqIndex = 0
@@ -84,6 +84,7 @@ def runSorter(control):
             else:  # otherwise drop it
                 print("dropping ball")
                 control.dropBall()
+            control.setRGB((0,0,0))
 
         # reached end of specified sequence
         if seqIndex == len(s1):

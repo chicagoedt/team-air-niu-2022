@@ -12,20 +12,20 @@ def buttonPressed():
 
 control = Control()
 
-control.setRGB(0, 255, 0)
+control.setRGB((0, 255, 0))
 control.button.wait_for_press()
-control.setRGB(0, 0, 0)
+control.setRGB((0, 0, 0))
 
 armMotor(control)
 
 control.button.when_pressed = buttonPressed
-
 while (True):
     global buttonHasBeenPressed
-    
-    control.setRGB(0, 0, 255)
+    buttonHasBeenPressed = False
+
+    control.setRGB((255, 0, 0))
     sleep(0.5)
-    control.setRGB(0, 0, 0)
+    control.setRGB((0, 0, 0))
     sleep(0.5)
 
     if buttonHasBeenPressed:

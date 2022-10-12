@@ -6,10 +6,10 @@ def armMotor(control):
 
     print("Plug in battery!")
     for i in range(10):
-        control.setRGB(0, 0, 255)
+        control.setRGB((0, 0, 255))
         print(10-i)
         sleep(0.5)
-        control.setRGB(0, 0, 0)
+        control.setRGB((0, 0, 0))
         sleep(0.5)
 
     control.vacuumMotor.value = -0.6

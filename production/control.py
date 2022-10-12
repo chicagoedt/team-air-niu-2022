@@ -18,7 +18,7 @@ class Control:
             print("no color sensor connected")
         self.doorServo = Servo(14)
         self.pushServo = Servo(15)
-        self.vacuumMotor = Servo(18)
+        self.vacuumMotor = Servo(26)
         self.chamberServo = Servo(23)
 
     # set the color of the rgb leds
@@ -69,7 +69,7 @@ class Control:
     # turn vacuum on/off
     def setVacuumMotor(self, on):
         if on:
-            self.vacuumMotor.value = 0
+            self.vacuumMotor.value = -0.5
         else:
             self.vacuumMotor.value = -1
 

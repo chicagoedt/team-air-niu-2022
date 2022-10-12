@@ -7,16 +7,16 @@ def boostColor(rgbValues):
     r = int(rgbValues[0])
     g = int(rgbValues[1])
     b = int(rgbValues[2])
-    
+
     rgbList = [r,g,b]
     max_value = max(rgbList)
     ratio = 255/max_value
-    
+
     r = int(ratio * r)
     g = int(ratio * g)
     b = int(ratio * b)
     return (r,g,b)
-        
+
 # determine if ball is in the chamber
 def ballInChamber(sensorRGB):
     if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):
@@ -43,6 +43,10 @@ def getBallColor(control):
 
     return getClosestColor(rgbAverage)
 
+def buttonPressed():
+    global buttonHasBeenPressed
+    buttonHasBeenPressed = True
+
 # program loop
 def runSorter(control):
     # initialize the sequences
@@ -64,8 +68,10 @@ def runSorter(control):
     control.resetServos()
     control.setVacuumMotor(True)
 
-    # TODO @MANH: add exit condition to while loop
+    control.button.when_pressed = buttonPressed
     while (True):
+        global buttonHasBeenPressed
+        buttonHasBeenPressed = False
         sensorRGB = control.readColor()
 
         # ball in the chamber
@@ -89,4 +95,7 @@ def runSorter(control):
         # reached end of specified sequence
         if seqIndex == len(s1):
             control.dropSequence()
+
+        if buttonHasBeenPressed:
+            break
 

@@ -69,7 +69,7 @@ class Control:
     # turn vacuum on/off
     def setVacuumMotor(self, on):
         if on:
-            self.vacuumMotor.value = -0.5
+            self.vacuumMotor.value = 0
         else:
             self.vacuumMotor.value = -1
 

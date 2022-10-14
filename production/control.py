@@ -33,31 +33,25 @@ class Control:
     def resetServos(self):
         self.doorServo.min()
         self.pushServo.min()
-        self.chamberServo.min()
-
-    # move the ball using the lever attached to pushServo
-    def moveBall(self):
-        self.pushServo.min()
-        sleep(0.5)
-        self.pushServo.max()
-        sleep(0.5)
-        self.pushServo.min()
-        sleep(0.5)
-
-    # opens the door of the sorting mechanism
-    def openDoor(self):
-        self.doorServo.min()
         sleep(0.5)
         self.doorServo.max()
+        self.pushServo.max()
         sleep(0.5)
         self.doorServo.min()
-        sleep(0.5)
+        self.pushServo.min()
 
-    # turn off vacuum, open the door, push the ball, turn on the vacuum
+    # let ball fall into basket chamber
     def keepBall(self):
-        self.setVacuumMotor(False) 
-        self.openDoor()
-        self.moveBall()
+        # lever in
+        self.pushServo.max()
+        sleep(0.2)
+        # vacuum off, door open
+        self.setVacuumMotor(False)
+        self.doorServo.max()
+        sleep(0.5)
+        # reset
+        self.doorServo.min()
+        self.pushServo.min()
         self.setVacuumMotor(True)
 
     # turn off the vacuum
@@ -69,16 +63,7 @@ class Control:
     # turn vacuum on/off
     def setVacuumMotor(self, on):
         if on:
-            self.vacuumMotor.value = 0
+            self.vacuumMotor.value = 0.1
         else:
             self.vacuumMotor.value = -1
-
-    # drop the balls in the basket
-    def dropSequence(self):
-        self.chamberServo.min()
-        sleep(0.5)
-        self.chamberServo.max()
-        sleep(0.5)
-        self.chamberServo.min()
-        sleep(0.5)
 

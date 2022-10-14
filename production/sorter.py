@@ -2,21 +2,6 @@ import numpy as np
 from control import *
 from colors import *
 
-# boost color with the ratio that would not squash the values.
-def boostColor(rgbValues):
-    r = int(rgbValues[0])
-    g = int(rgbValues[1])
-    b = int(rgbValues[2])
-
-    rgbList = [r,g,b]
-    max_value = max(rgbList)
-    ratio = 255/max_value
-
-    r = int(ratio * r)
-    g = int(ratio * g)
-    b = int(ratio * b)
-    return (r,g,b)
-
 # determine if ball is in the chamber
 def ballInChamber(sensorRGB):
     if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):
@@ -43,16 +28,13 @@ def getBallColor(control):
 
     return getClosestColor(rgbAverage)
 
+# change global variable when button is pressed
 def buttonPressed():
     global buttonHasBeenPressed
     buttonHasBeenPressed = True
 
-# program loop
 def runSorter(control):
     # initialize the sequences
-    s1 = ("blue", "purple", "red", "blue")
-    s2 = ("green", "yellow", "red", "green")
-    s3 = ("blue", "purple", "red", "green")
     lightColors = {
         "red":(255, 0, 0),
         "orange":(255, 40, 0),
@@ -62,39 +44,38 @@ def runSorter(control):
         "purple":(80, 0, 255),
         "pink":(255, 50, 50)
     }
-    sequence = (s1, s2, s3)
-    seqIndex = 0
 
+    # set servos to min and turn on vacuum motor
     control.resetServos()
     control.setVacuumMotor(True)
 
+    # when the button is pressed, call the buttonPressed method
     control.button.when_pressed = buttonPressed
+
+    # execution loop
     while (True):
         global buttonHasBeenPressed
         buttonHasBeenPressed = False
-        sensorRGB = control.readColor()
+
+        sensorRGB = control.readColor()  # get colorSensor reading
 
         # ball in the chamber
         if ballInChamber(sensorRGB):
             # get color of ball as a string
             ballColor = getBallColor(control)
             print(ballColor)
-            control.setRGB(lightColors[ballColor])
 
+            control.setRGB(lightColors[ballColor])  # turn on LED with ballColor
 
             # if it matches the next color we need, keep it
-            if ballColor == s1[seqIndex]:
+            if ballColor not in ('orange', 'pink'):
                 print("keeping ball")
                 control.keepBall()
-                seqIndex += 1
             else:  # otherwise drop it
                 print("dropping ball")
                 control.dropBall()
-            control.setRGB((0,0,0))
 
-        # reached end of specified sequence
-        if seqIndex == len(s1):
-            control.dropSequence()
+            control.setRGB((0,0,0))  # turn off LED
 
         if buttonHasBeenPressed:
             break

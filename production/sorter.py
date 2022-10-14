@@ -11,7 +11,7 @@ def ballInChamber(sensorRGB):
     return True
 
 # read color 10 times, get the average, then return a string color closest to that average
-def getBallColor(control):
+def getBallColor(control f=None):
     rgbReadings = []
     numReadings = 10
 
@@ -19,7 +19,9 @@ def getBallColor(control):
 
     for i in range(numReadings):
         rgbReadings.append(control.readColor())
-        sleep(0.1)
+        if (f is not None):
+            f.write("{0} {1} {2}\n".format(color_rgb[0], color_rgb[1], color_rgb[2]))
+        sleep(0.07)
 
     rgbAverage = np.mean(rgbReadings, 0)
 
@@ -33,7 +35,7 @@ def buttonPressed():
     global buttonHasBeenPressed
     buttonHasBeenPressed = True
 
-def runSorter(control):
+def runSorter(control, f=None):
     # initialize the sequences
     lightColors = {
         "red":(255, 0, 0),
@@ -62,7 +64,7 @@ def runSorter(control):
         # ball in the chamber
         if ballInChamber(sensorRGB):
             # get color of ball as a string
-            ballColor = getBallColor(control)
+            ballColor = getBallColor(control, f)
             print(ballColor)
 
             control.setRGB(lightColors[ballColor])  # turn on LED with ballColor

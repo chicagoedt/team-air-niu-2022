@@ -4,29 +4,36 @@ from colors import *
 
 # determine if ball is in the chamber
 def ballInChamber(sensorRGB):
-    if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0)):
+    if (sensorRGB == (45, 0, 0) or sensorRGB == (255, 0, 0) or sensorRGB == (45, 45, 0)):
         print('no ball')
         return False
     print('ball')
     return True
 
 # read color 10 times, get the average, then return a string color closest to that average
-def getBallColor(control f=None):
+def getBallColor(control, f=None):
     rgbReadings = []
     numReadings = 10
 
     print("getting average...")
+    if (f is not None):
+        f.write("\n")
 
     for i in range(numReadings):
-        rgbReadings.append(control.readColor())
+        colorRGB = control.readColor()
+        rgbReadings.append(colorRGB)
         if (f is not None):
-            f.write("{0} {1} {2}\n".format(color_rgb[0], color_rgb[1], color_rgb[2]))
+            f.write("{0} {1} {2}\n".format(colorRGB[0], colorRGB[1], colorRGB[2]))
         sleep(0.07)
+
 
     rgbAverage = np.mean(rgbReadings, 0)
 
     print("std:", np.std(rgbReadings, 0))
     print("avg:", rgbAverage)
+
+    if (f is not None):
+        f.write("avg: {0}\n".format(rgbAverage))
 
     return getClosestColor(rgbAverage)
 

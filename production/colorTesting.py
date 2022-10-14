@@ -1,7 +1,7 @@
 from control import *
 from armMotor import *
-from control import *
 from time import sleep
+from sorter import *
 
 # open file to write to
 filename = input("Enter a filename (with .txt at the end): ")

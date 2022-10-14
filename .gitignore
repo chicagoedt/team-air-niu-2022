@@ -2,3 +2,4 @@
 Codebase/production/color-data/
 *__pycache__/
 .vscode/
+*color-data/

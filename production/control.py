@@ -19,6 +19,7 @@ class Control:
         self.doorServo = Servo(14)
         self.pushServo = Servo(15)
         self.vacuumMotor = Servo(26)
+        self.vacuumMotor.value = -1
         self.chamberServo = Servo(23)
 
     # set the color of the rgb leds
@@ -57,13 +58,13 @@ class Control:
     # turn off the vacuum
     def dropBall(self):
         self.setVacuumMotor(False)
-        sleep(3)
+        sleep(1)
         self.setVacuumMotor(True)
 
     # turn vacuum on/off
     def setVacuumMotor(self, on):
         if on:
-            self.vacuumMotor.value = 0.1
+            self.vacuumMotor.value = 0.15
         else:
             self.vacuumMotor.value = -1
 

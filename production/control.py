@@ -39,12 +39,14 @@ class Control:
         self.pushServo.max()
         sleep(0.5)
         self.doorServo.min()
+        self.doorServo.min()
+        self.pushServo.min()
         self.pushServo.min()
 
     # let ball fall into basket chamber
     def keepBall(self):
         # lever in
-        self.pushServo.max()
+        self.pushServo.value = 0.6
         sleep(0.2)
         # vacuum off, door open
         self.setVacuumMotor(False)

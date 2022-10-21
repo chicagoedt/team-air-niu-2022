@@ -35,7 +35,7 @@ class Control:
         self.doorServo.min()
         self.pushServo.min()
         sleep(0.5)
-        self.doorServo.max()
+        self.doorServo.value = 0.1
         self.pushServo.max()
         sleep(0.5)
         self.doorServo.min()
@@ -50,7 +50,7 @@ class Control:
         sleep(0.2)
         # vacuum off, door open
         self.setVacuumMotor(False)
-        self.doorServo.max()
+        self.doorServo.value = 0.1
         sleep(0.5)
         # reset
         self.doorServo.min()

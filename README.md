@@ -1,6 +1,6 @@
 # team-air
 
-Codebase for the Team Air project that will be used in the AUVSI SUAS competition.
+Codebase for the Team Air project that will be used in the NIU STEM Fest
 
 Captains: Kaloyan Stalev and Adam Beigel
 
